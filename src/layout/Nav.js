@@ -12,7 +12,7 @@ function Nav() {
                     <Link to="/library">Inventaire</Link>
                 </li>
                 <li>
-                    <Link to="/basket">Panier</Link>
+                    <Link to="/cart">Panier</Link>
                 </li>
             </ul>
         </div>

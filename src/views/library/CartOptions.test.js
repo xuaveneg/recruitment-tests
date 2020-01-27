@@ -23,7 +23,7 @@ test('should have 2 Routes', () => {
     // THEN
     expect(cartOptions.find(Route)).toHaveLength(2);
     expect(cartOptions.find(Route).get(0).props).toHaveProperty('path', '/library');
-    expect(cartOptions.find(Route).get(1).props).toHaveProperty('path', '/basket');
+    expect(cartOptions.find(Route).get(1).props).toHaveProperty('path', '/cart');
 });
 
 test('should have 2 divs', () => {

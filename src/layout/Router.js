@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 
 import Home from '../views/Home';
 import Library from '../views/Library';
-import Basket from '../views/Basket';
+import Cart from '../views/Cart';
 
 function Router() {
     return (
@@ -14,8 +14,8 @@ function Router() {
             <Route path="/library">
                 <Library />
             </Route>
-            <Route path="/basket">
-                <Basket />
+            <Route path="/cart">
+                <Cart />
             </Route>
         </Switch>
     );

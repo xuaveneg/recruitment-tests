@@ -23,5 +23,5 @@ test('should have 2 correct links', () => {
     // THEN
     expect(home.find(Link)).toHaveLength(2);
     expect(home.find(Link).get(0).props).toHaveProperty('to', '/library');
-    expect(home.find(Link).get(1).props).toHaveProperty('to', '/basket');
+    expect(home.find(Link).get(1).props).toHaveProperty('to', '/cart');
 });

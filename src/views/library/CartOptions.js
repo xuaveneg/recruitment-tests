@@ -9,7 +9,7 @@ function CartOptions({id}) {
             <Route path="/library">
                 <div onclick={() => addToCart(id)}>Ajouter au panier</div>
             </Route>
-            <Route path="/basket">
+            <Route path="/cart">
                 <div onclick={() => removeFromCart(id)}>Retirer du panier</div>
             </Route>
         </Switch>

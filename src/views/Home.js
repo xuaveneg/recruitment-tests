@@ -9,7 +9,7 @@ function Home() {
             </div>
             <div>
                 Vous pourrez ici avoir <Link to='/library'>l'inventaire</Link> des livres de la bibliothèque
-                et les ajouter à <Link to='/basket'>votre panier</Link>.
+                et les ajouter à <Link to='/cart'>votre panier</Link>.
             </div>
         </div>
     );

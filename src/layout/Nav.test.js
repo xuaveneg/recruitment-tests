@@ -14,7 +14,7 @@ test('should render 3 correct links', () => {
     expect(nav.find(Link)).toHaveLength(3);
     expect(nav.find(Link).get(0).props).toHaveProperty('to', '/');
     expect(nav.find(Link).get(1).props).toHaveProperty('to', '/library');
-    expect(nav.find(Link).get(2).props).toHaveProperty('to', '/basket');
+    expect(nav.find(Link).get(2).props).toHaveProperty('to', '/cart');
 });
 
 test('should have single div', () => {

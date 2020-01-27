@@ -5,7 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 import Router from './Router';
 import Home from '../views/Home';
 import Library from '../views/Library';
-import Basket from '../views/Basket';
+import Cart from '../views/Cart';
 
 test('should render single Switch', () => {
     // GIVEN
@@ -38,7 +38,7 @@ test('should have 3 correct Routes', () => {
     expect(router.find(Route).get(0).props).toHaveProperty('exact', true);
     expect(router.find(Route).get(0).props).toHaveProperty('path', '/');
     expect(router.find(Route).get(1).props).toHaveProperty('path', '/library');
-    expect(router.find(Route).get(2).props).toHaveProperty('path', '/basket');
+    expect(router.find(Route).get(2).props).toHaveProperty('path', '/cart');
 });
 
 test('should have single Home component', () => {
@@ -61,12 +61,12 @@ test('should have single Library component', () => {
     expect(router.find(Library)).toHaveLength(1);
 });
 
-test('should have single Basket component', () => {
+test('should have single Cart component', () => {
     // GIVEN
 
     // WHEN
     const router = shallow(<Router />);
 
     // THEN
-    expect(router.find(Basket)).toHaveLength(1);
+    expect(router.find(Cart)).toHaveLength(1);
 });
