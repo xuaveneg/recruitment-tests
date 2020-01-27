@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import Book from './Book';
+import CartOptions from './CartOptions';
 
 test('should be div', () => {
     // GIVEN
@@ -95,4 +96,15 @@ test('should display synopsis paragraphs', () => {
     expect(book.find('p').at(0).text()).toEqual('test1');
     expect(book.find('p').at(1).text()).toEqual('test2');
     expect(book.find('p').at(2).text()).toEqual('test3');
+});
+
+test('should display CartOptions Component with isbn', () => {
+    // GIVEN
+
+    // WHEN
+    const book = shallow(<Book book={{isbn: 'test'}} />);
+
+    // THEN
+    expect(book.find(CartOptions)).toHaveLength(1);
+    expect(book.find(CartOptions).first().props()).toHaveProperty('id', 'test');
 });

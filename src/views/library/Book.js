@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CartOptions from './CartOptions';
+
 function Book({book}) {
     return (
         <div>
@@ -12,6 +14,7 @@ function Book({book}) {
                 .map((synopsisParagraph, index) => (
                     <p key={index}>{synopsisParagraph}</p>
             ))}
+            {book.isbn && <CartOptions id={book.isbn} />}
         </div>
     );
 }
@@ -20,7 +23,7 @@ Book.propTypes = {
     book: PropTypes.shape({
         title: PropTypes.string,
         cover: PropTypes.string,
-        isbn: PropTypes.string,
+        isbn: PropTypes.string.isRequired,
         price: PropTypes.number,
         synopsis: PropTypes.arrayOf(
             PropTypes.string
