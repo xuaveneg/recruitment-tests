@@ -1,7 +1,8 @@
 import React from 'react';
-import {shallow, render, mount} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 
 import Library from './Library';
+import Book from './library/Book';
 
 test('should fetch data from server', () => {
     // GIVEN
@@ -60,5 +61,26 @@ test('should log error when server fails on books retrieval', () => {
         .then(() => {
             expect(library.state('books')).toEqual([]);
             expect(errorMessage).toEqual('fetch books failed with error Failed.');
-        })
+        });
+});
+
+test('should render single div', () => {
+    // GIVEN
+
+    // WHEN
+    const library = shallow(<Library />);
+
+    // THEN
+    expect(library.is('div')).toBe(true);
+});
+
+test('should render books size times Book component', () => {
+    // GIVEN
+    const library = shallow(<Library />);
+
+    // WHEN
+    library.setState({books: [1, 2, 3]});
+
+    // THEN
+    expect(library.find(Book)).toHaveLength(3);
 });

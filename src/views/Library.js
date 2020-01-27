@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import Book from './library/Book';
+
 class Library extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +22,11 @@ class Library extends Component {
 
     render () {
         return (
-            <div />
+            <div>
+                {this.state.books.map((book) => (
+                    <Book book={book} />
+                ))}
+            </div>
         );
     }
 }
