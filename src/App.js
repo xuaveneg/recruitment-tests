@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Nav from './layout/Nav';
@@ -13,12 +12,14 @@ function App() {
             <header className="App-header">
                 <Header />
             </header>
-            <nav>
-                <Nav />
-            </nav>
-            <article>
-                <AppRouter />
-            </article>
+            <Router>
+                <nav>
+                    <Nav />
+                </nav>
+                <article>
+                    <AppRouter />
+                </article>
+            </Router>
             <footer>
                 <Footer />
             </footer>

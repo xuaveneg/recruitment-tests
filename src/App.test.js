@@ -1,11 +1,12 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 import App from './App';
 import Header from './layout/Header';
 import Nav from './layout/Nav';
 import Footer from './layout/Footer';
-import Router from './layout/Router';
+import AppRouter from './layout/Router';
 
 test('should render layout with header', () => {
     // GIVEN
@@ -77,7 +78,17 @@ test('should render layout with article', () => {
     expect(app.find('article')).toHaveLength(1);
 });
 
-test('should render layout with router component', () => {
+test('should render layout with custom router component', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find(AppRouter)).toHaveLength(1);
+});
+
+test('should have react Router component', () => {
     // GIVEN
 
     // WHEN

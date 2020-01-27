@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import Nav from './Nav';
 
@@ -17,16 +17,6 @@ test('should render 3 correct links', () => {
     expect(nav.find(Link).get(2).props).toHaveProperty('to', '/basket');
 });
 
-test('should have Router', () => {
-    // GIVEN
-
-    // WHEN
-    const nav = shallow(<Nav />);
-
-    // THEN
-    expect(nav.is(Router)).toBe(true);
-});
-
 test('should have single div', () => {
     // GIVEN
 
@@ -34,7 +24,7 @@ test('should have single div', () => {
     const nav = shallow(<Nav />);
 
     // THEN
-    expect(nav.find('div')).toHaveLength(1);
+    expect(nav.is('div')).toBe(true);
 });
 
 test('should have single ul', () => {
