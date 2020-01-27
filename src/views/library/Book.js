@@ -1,9 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Basket() {
+function Book({book}) {
     return (
-        <div />
+        <div>
+            {book.title && <h2>{book.title}</h2>}
+            {book.cover && <img src={book.cover} alt={book.title || book.cover}/>}
+            {book.isbn && <div>{book.isbn}</div>}
+            {book.price && <div>{book.price}</div>}
+            {(book.synopsis || [])
+                .map((synopsisParagraph, index) => (
+                    <p key={index}>{synopsisParagraph}</p>
+            ))}
+        </div>
     );
 }
 
-export default Basket;
+Book.propTypes = {
+    book: PropTypes.shape({
+        title: PropTypes.string,
+        cover: PropTypes.string,
+        isbn: PropTypes.string,
+        price: PropTypes.number,
+        synopsis: PropTypes.arrayOf(
+            PropTypes.string
+        )
+    }).isRequired
+};
+
+export default Book;
