@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import Library from './Library';
 import Book from './library/Book';
@@ -26,7 +26,7 @@ test('should put data from server on books state on success', () => {
         ]}));
 
     // WHEN
-    const library = mount(<Library />);
+    const library = shallow(<Library />);
 
     // THEN
     return Promise
@@ -52,7 +52,7 @@ test('should log error when server fails on books retrieval', () => {
         });
 
     // WHEN
-    const library = mount(<Library />);
+    const library = shallow(<Library />);
 
     // THEN
     return Promise
