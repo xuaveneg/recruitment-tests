@@ -23,8 +23,10 @@ class Library extends Component {
     render () {
         return (
             <div>
-                {this.state.books.map((book) => (
-                    <Book book={book} />
+                {((this.state || {})
+                    .books || [])
+                    .map((book, index) => (
+                        <Book book={book} key={index} />
                 ))}
             </div>
         );
