@@ -5,6 +5,7 @@ import App from './App';
 import Header from './layout/Header';
 import Nav from './layout/Nav';
 import Footer from './layout/Footer';
+import Router from './layout/Router';
 
 test('should render layout with header', () => {
     // GIVEN
@@ -13,7 +14,17 @@ test('should render layout with header', () => {
     const app = shallow(<App />);
 
     // THEN
-    expect(app.find(Header)).to.have.lengthOf(1);
+    expect(app.find('header')).toHaveLength(1);
+});
+
+test('should render layout with header component', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find(Header)).toHaveLength(1);
 });
 
 test('should render layout with nav', () => {
@@ -23,7 +34,17 @@ test('should render layout with nav', () => {
     const app = shallow(<App />);
 
     // THEN
-    expect(app.find(Nav)).to.have.lengthOf(1);
+    expect(app.find('nav')).toHaveLength(1);
+});
+
+test('should render layout with nav component', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find(Nav)).toHaveLength(1);
 });
 
 test('should render layout with footer', () => {
@@ -33,5 +54,35 @@ test('should render layout with footer', () => {
     const app = shallow(<App />);
 
     // THEN
-    expect(app.find(Footer)).to.have.lengthOf(1);
+    expect(app.find('footer')).toHaveLength(1);
+});
+
+test('should render layout with footer component', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find(Footer)).toHaveLength(1);
+});
+
+test('should render layout with article', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find('article')).toHaveLength(1);
+});
+
+test('should render layout with router component', () => {
+    // GIVEN
+
+    // WHEN
+    const app = shallow(<App />);
+
+    // THEN
+    expect(app.find(Router)).toHaveLength(1);
 });
