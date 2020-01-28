@@ -10,11 +10,15 @@ class Library extends Component {
         };
     }
 
+    filterBooks(books) {
+        return books;
+    }
+
     componentDidMount() {
         fetch('http://henri-potier.xebia.fr/books')
             .then((response) => response.json())
             .then((json) => {
-                this.setState({books: json});
+                this.setState({books: this.filterBooks(json)});
             }, (error) => {
                 console.error('fetch books failed with error ' + error.message);
             });
