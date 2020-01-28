@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
@@ -9,7 +9,7 @@ import AppRouter from './layout/Router';
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
+            <header>
                 <Header />
             </header>
             <Router>
