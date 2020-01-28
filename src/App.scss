@@ -8,7 +8,23 @@ $color-s-darker: #7C735F;
 $header-size: 40px;
 $footer-size: 20px;
 $menu-size: 30px;
+$inner-margin-size: 20px;
 $responsive-size: 500px;
+
+$tile-width: 30vw;
+$tile-img-width: 10vw;
+$tile-border-radius: 10px;
+$full-width: 100%;
+$full-absolute-width: 100vw;
+$full-height: 100vh;
+
+$semi-opacity: 0.5;
+
+$z-top: 100;
+$z-semi-top: 50;
+
+$font-title-size: 20px;
+$font-size: 15px;
 
 header, footer, nav {
     display: flex;
@@ -32,38 +48,63 @@ article {
 }
 
 header {
+    position: fixed;
+    top: 0;
     font-size: calc(#{$header-size} / 2);
     height: $header-size;
-    width: 100%;
+    width: $full-width;
+    z-index: $z-top;
 }
 footer {
     position: fixed;
     bottom: 0;
     font-size: calc(#{$footer-size} / 2);
     height: $footer-size;
-    width: 100%;
+    width: $full-width;
+    z-index: $z-top;
+}
+article {
+    position: relative;
+    top: calc(#{$header-size} + #{$menu-size});
+    min-height: calc(#{$full-height} - #{$header-size} - #{$menu-size} - #{$footer-size});
+    width: $full-width;
+    z-index: $z-semi-top;
 }
 nav {
+    position: fixed;
+    top: $header-size;
     font-size: calc(#{$menu-size} / 2);
     height: $menu-size;
-    width: 100%;
-    div {
-        width: 100%;
+    width: $full-width;
+    border-bottom: 1px $color-primary solid;
+    z-index: $z-top;
+    & > div {
+        width: $full-width;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        & > div {
+            &:last-of-type {
+                text-align: right;
+                margin-right: $inner-margin-size;
+            }
+            width: calc(#{$full-width} / 2);
+        }
         ul {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: start;
+            justify-content: flex-start;
             list-style: none;
         }
         li {
-            padding: 0 20px;
+            padding: 0 $inner-margin-size;
         }
     }
 }
 
 a {
-    &:visited, &:focus,  {
+    &, &:visited, &:focus,  {
         color: $color-secondary;
     }
     &:active, &:hover {
@@ -75,19 +116,107 @@ a {
 article {
     & > div {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: space-around;
         flex-wrap: wrap;
-        & > div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: start;
-            width: 30vw;
-            max-height: 100vh;
-            overflow: ellipsis;
-            img {
-                height: 20vw;
-            }
+        padding-bottom: calc(#{$inner-margin-size} + #{$footer-size});
+        & > div:last-of-type {
+            text-align: right;
+            margin: $inner-margin-size;
         }
     }
+    div.books {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    div.book {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: $inner-margin-size;
+        width: $tile-width;
+        max-height: $full-height;
+        text-align: center;
+        background-color: $color-p-lighter;
+        border: 1px solid $color-p-darker;
+        border-radius: $tile-border-radius;
+        h2 {
+            font-size: $font-title-size;
+            line-height: $font-title-size;
+            height: calc(2 * #{$font-title-size});
+            overflow: hidden;
+            cursor: pointer;
+        }
+        & > div {
+            font-size: $font-size;
+            line-height: $font-size;
+            height: calc(2 * #{$font-size});
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            &:first-of-type {
+                cursor: pointer;
+            }
+            &:not(:last-of-type) {
+                width: $tile-width;
+            }
+            &:last-of-type {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 calc(#{$inner-margin-size} / 2);
+                margin-bottom: $font-title-size;
+                background-color: $color-p-darker;
+                border: 1px $color-primary;
+                border-radius: calc(#{$tile-border-radius} / 3);
+                cursor: pointer;
+            }
+        }
+        img {
+            width: $tile-img-width;
+            margin-bottom: $font-title-size;
+        }
+    }
+}
+
+.synopsis > div {
+    cursor: pointer;
+    &:first-of-type {
+        position: fixed;
+        width: $full-absolute-width;
+        height: $full-height;
+        top: 0;
+        left: 0;
+        background-color: $color-p-darker;
+        opacity: $semi-opacity;
+    }
+    &:last-of-type {
+        position: fixed;
+        width: calc(#{$full-absolute-width} * 2 / 3);
+        height: calc(#{$full-height} * 2 / 3);
+        top: calc(#{$full-height} / 12 + #{$header-size} + #{$menu-size});
+        left: calc(#{$full-absolute-width} / 6);
+        background-color: $color-p-lighter;
+        opacity: 1;
+        white-space: initial;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: start;
+        border: 1px $color-primary;
+        border-radius: calc(#{$tile-border-radius} / 3);
+        p {
+            margin: $inner-margin-size;
+        }
+    }
+}
+
+.home {
+    display: flex;
+    min-height: calc(#{$full-height} - #{$header-size} - #{$menu-size} - #{$footer-size});
+    align-items: center;
+    justify-content: space-around;
 }

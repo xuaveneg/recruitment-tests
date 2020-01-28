@@ -8,7 +8,7 @@ test('should be Switch', () => {
     // GIVEN
 
     // WHEN
-    const cartOptions = shallow(<CartOptions id={'test1'} />);
+    const cartOptions = shallow(<CartOptions id={'test1'} price={4} />);
 
     // THEN
     expect(cartOptions.is(Switch)).toBe(true);
@@ -18,7 +18,7 @@ test('should have 2 Routes', () => {
     // GIVEN
 
     // WHEN
-    const cartOptions = shallow(<CartOptions id={'test2'} />);
+    const cartOptions = shallow(<CartOptions id={'test2'} price={5} />);
 
     // THEN
     expect(cartOptions.find(Route)).toHaveLength(2);
@@ -30,7 +30,7 @@ test('should have 2 divs', () => {
     // GIVEN
 
     // WHEN
-    const cartOptions = shallow(<CartOptions id={'test3'} />);
+    const cartOptions = shallow(<CartOptions id={'test3'} price={6} />);
 
     // THEN
     expect(cartOptions.find('div')).toHaveLength(2);

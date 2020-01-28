@@ -64,7 +64,7 @@ test('should log error when server fails on books retrieval', () => {
         });
 });
 
-test('should render single div', () => {
+test('should render wrapper div', () => {
     // GIVEN
 
     // WHEN
@@ -72,6 +72,16 @@ test('should render single div', () => {
 
     // THEN
     expect(library.is('div')).toBe(true);
+});
+
+test('should render inner div', () => {
+    // GIVEN
+
+    // WHEN
+    const library = shallow(<Library />);
+
+    // THEN
+    expect(library.find('div.books')).toHaveLength(1);
 });
 
 test('should render books size times Book component', () => {

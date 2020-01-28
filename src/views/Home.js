@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 function Home() {
     return (
-        <div>
+        <div className='home'>
             <div>
                 Bienvenue sur le site de la Bibliothèque d'Henri Potier.
             </div>

@@ -14,6 +14,10 @@ class Library extends Component {
         return books;
     }
 
+    renderAdditionalData() {
+        return null;
+    }
+
     componentDidMount() {
         fetch('http://henri-potier.xebia.fr/books')
             .then((response) => response.json())
@@ -33,10 +37,13 @@ class Library extends Component {
         );
         return (
             <div>
-                {filteredBooks
-                    .map((book, index) => (
-                        <Book book={book} key={index} />
-                ))}
+                <div className='books'>
+                    {filteredBooks
+                        .map((book, index) => (
+                            <Book book={book} key={index} />
+                    ))}
+                </div>
+                {this.renderAdditionalData()}
             </div>
         );
     }

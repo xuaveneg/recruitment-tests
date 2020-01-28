@@ -3,6 +3,7 @@ import {shallow} from 'enzyme';
 import {Link} from 'react-router-dom';
 
 import Nav from './Nav';
+import cartService from '../views/library/Cart.service';
 
 test('should render 3 correct links', () => {
     // GIVEN
@@ -27,6 +28,17 @@ test('should have single div', () => {
     expect(nav.is('div')).toBe(true);
 });
 
+
+test('should have two wrapped divs', () => {
+    // GIVEN
+
+    // WHEN
+    const nav = shallow(<Nav />);
+
+    // THEN
+    expect(nav.find('div > div')).toHaveLength(2);
+});
+
 test('should have single ul', () => {
     // GIVEN
 
@@ -45,4 +57,15 @@ test('should have 3 li', () => {
 
     // THEN
     expect(nav.find('li')).toHaveLength(3);
+});
+
+test('should watch Cart service', () => {
+    // GIVEN
+    cartService.watchers = [];
+
+    // WHEN
+    const nav = shallow(<Nav />);
+
+    // THEN
+    expect(cartService.watchers).toHaveLength(1);
 });

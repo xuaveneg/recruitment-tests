@@ -14,6 +14,16 @@ test('should have 2 divs', () => {
     expect(home.find('div')).toHaveLength(3);
 });
 
+test('should have wrapper divs', () => {
+    // GIVEN
+
+    // WHEN
+    const home = shallow(<Home />);
+
+    // THEN
+    expect(home.is('div.home')).toBe(true);
+});
+
 test('should have 2 correct links', () => {
     // GIVEN
 

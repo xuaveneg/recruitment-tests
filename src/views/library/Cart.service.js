@@ -1,12 +1,23 @@
+import offerService from './Offer.service';
+
 class Cart {
     constructor() {
         this.watchers = [];
+        this.price = +localStorage.getItem('price') || 0;
+        const storageCart = localStorage.getItem('cart');
+        try {
+            const parsedCart = JSON.parse(storageCart);
+            this.cart = Array.isArray(parsedCart) ? parsedCart : [];
+        } catch (SyntaxError) {
+            this.cart = [];
+        }
     }
 
     watchCart(component) {
         if (this.watchers.indexOf(component) === -1) {
             this.watchers.push(component);
         }
+        this.updateWatchers(false);
     }
 
     unwatchCart(component) {
@@ -15,36 +26,45 @@ class Cart {
         }
     }
 
-    updateWatchers(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
+    updateWatchersState(discount) {
         this.watchers.forEach(watcher => {
-            watcher.setState({cart: cart});
+            watcher.setState({
+                cart: this.cart,
+                price: this.price,
+                discount: discount
+            });
         });
     }
 
-    addToCart(id) {
-        const cart = this.getCart();
-        if (cart.indexOf(id) === -1) {
-            cart.push(id);
-            this.updateWatchers(cart);
+    updateWatchers(canUpdateSyncState = true) {
+        if (this.cart.length > 0) {
+            offerService.retrieveData(this.cart.join(','), this.price)
+                .then((discount) => this.updateWatchersState(discount))
+        } else if (canUpdateSyncState) {
+            this.updateWatchersState({discountPrice: 0});
+        }
+    }
+
+    updateData() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        localStorage.setItem('price', this.price);
+        this.updateWatchers();
+    }
+
+    addToCart(id, price) {
+        if (this.cart.indexOf(id) === -1) {
+            this.cart.push(id);
+            this.price = this.price + price;
+            this.updateData();
         }
     };
 
-    removeFromCart(id) {
-        const oldCart = this.getCart();
-        const cart = oldCart.filter((cartId) => id !== cartId);
-        if (cart.length !== oldCart.length) {
-            this.updateWatchers(cart);
-        }
-    };
-
-    getCart() {
-        let cart = localStorage.getItem('cart');
-        try {
-           cart = JSON.parse(cart);
-            return Array.isArray(cart) ? cart : [];
-        } catch (SyntaxError) {
-            return [];
+    removeFromCart(id, price) {
+        const newCart = this.cart.filter((cartId) => id !== cartId);
+        if (newCart.length !== this.cart.length) {
+            this.cart = newCart;
+            this.price = Math.max(0, this.price - price);
+            this.updateData();
         }
     };
 }

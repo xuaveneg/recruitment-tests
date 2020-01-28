@@ -3,6 +3,7 @@ import {shallow} from 'enzyme';
 
 import Book from './Book';
 import CartOptions from './CartOptions';
+import Synopsis from './Synopsis';
 
 test('should be div', () => {
     // GIVEN
@@ -61,7 +62,7 @@ test('should display isbn', () => {
     const book = shallow(<Book book={{isbn: 'test'}} />);
 
     // THEN
-    expect(book.find('div').at(1).text()).toEqual('test');
+    expect(book.find('div').at(1).text()).toEqual('Référence : test');
 });
 
 test('should display price', () => {
@@ -71,31 +72,19 @@ test('should display price', () => {
     const book = shallow(<Book book={{price: 15, isbn: 'isbnTest'}} />);
 
     // THEN
-    expect(book.find('div').at(2).text()).toEqual('15');
+    expect(book.find('div').at(2).text()).toEqual('Prix : 15.00€');
 });
 
-test('should display single synopsis paragraph', () => {
+test('should display Synopsis Component with synopsis', () => {
     // GIVEN
 
     // WHEN
-    const book = shallow(<Book book={{synopsis: ['test'], isbn: 'isbnTest'}} />);
+    const book = shallow(<Book book={{isbn: 'test', synopsis: ['test1', 'test2']}} />);
+    book.setState({showSynopsis: true});
 
     // THEN
-    expect(book.find('p')).toHaveLength(1);
-    expect(book.find('p').at(0).text()).toEqual('test');
-});
-
-test('should display synopsis paragraphs', () => {
-    // GIVEN
-
-    // WHEN
-    const book = shallow(<Book book={{synopsis: ['test1', 'test2', 'test3'], isbn: 'isbnTest'}} />);
-
-    // THEN
-    expect(book.find('p')).toHaveLength(3);
-    expect(book.find('p').at(0).text()).toEqual('test1');
-    expect(book.find('p').at(1).text()).toEqual('test2');
-    expect(book.find('p').at(2).text()).toEqual('test3');
+    expect(book.find(Synopsis)).toHaveLength(1);
+    expect(book.find(Synopsis).get(0).props).toHaveProperty('synopsis', ['test1', 'test2']);
 });
 
 test('should display CartOptions Component with isbn', () => {
