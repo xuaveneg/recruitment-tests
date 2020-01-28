@@ -158,3 +158,86 @@ test('should not add twice same id', () => {
     // THEN
     expect(JSON.parse(localStorage.getItem('cart'))).toEqual(['test1']);
 });
+
+test('should update watchers', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+    let state;
+    cartService.watchCart({setState: (value) => state = value});
+
+    // WHEN
+    cartService.addToCart('test1');
+
+    // THEN
+    expect(state).toEqual({cart: ['test1']});
+});
+
+test('should update watchers twice', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+    let state;
+
+    // WHEN
+    cartService.addToCart('test1');
+    cartService.watchCart({setState: (value) => state = value});
+    cartService.addToCart('test2');
+
+    // THEN
+    expect(state).toEqual({cart: ['test1', 'test2']});
+});
+
+test('should not update watchers before watching', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+    let state;
+
+    // WHEN
+    cartService.addToCart('test1');
+    cartService.addToCart('test2');
+    cartService.watchCart({setState: (value) => state = value});
+
+    // THEN
+    expect(state).toEqual(undefined);
+});
+
+test('should not update watchers after unwatching', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+    let state;
+    const component = {setState: (value) => state = value};
+
+    // WHEN
+    cartService.watchCart(component);
+    cartService.addToCart('test1');
+    cartService.addToCart('test2');
+    cartService.unwatchCart(component);
+    cartService.removeFromCart('test1');
+
+    // THEN
+    expect(state).toEqual({cart: ['test1', 'test2']});
+    expect(JSON.parse(localStorage.getItem('cart'))).toEqual(['test2']);
+});
+
+test('should watch 2 watchers', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+    let state1, state2;
+    const component1 = {setState: (value) => state1 = value};
+    const component2 = {setState: (value) => state2 = value};
+
+    // WHEN
+    cartService.watchCart(component1);
+    cartService.addToCart('test1');
+    cartService.addToCart('test2');
+    cartService.watchCart(component2);
+    cartService.removeFromCart('test1');
+    cartService.unwatchCart(component2);
+    cartService.removeFromCart('test3');
+    cartService.unwatchCart(component1);
+    cartService.removeFromCart('test2');
+
+    // THEN
+    expect(state1).toEqual({cart: ['test2']});
+    expect(state2).toEqual({cart: ['test2']});
+    expect(JSON.parse(localStorage.getItem('cart'))).toEqual([]);
+});
