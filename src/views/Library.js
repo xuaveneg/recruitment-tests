@@ -18,17 +18,22 @@ class Library extends Component {
         fetch('http://henri-potier.xebia.fr/books')
             .then((response) => response.json())
             .then((json) => {
-                this.setState({books: this.filterBooks(json)});
+                this.setState({books: json});
             }, (error) => {
                 console.error('fetch books failed with error ' + error.message);
             });
     }
 
     render () {
+        const filteredBooks = this.filterBooks(
+            (
+                (this.state || {})
+                    .books || []
+            )
+        );
         return (
             <div>
-                {((this.state || {})
-                    .books || [])
+                {filteredBooks
                     .map((book, index) => (
                         <Book book={book} key={index} />
                 ))}

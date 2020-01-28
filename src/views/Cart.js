@@ -1,5 +1,3 @@
-import React, {Component} from 'react';
-
 import Library from './Library';
 import cartService from './library/Cart.service';
 

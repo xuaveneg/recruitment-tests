@@ -11,7 +11,7 @@ class Cart {
 
     unwatchCart(component) {
         if (this.watchers.indexOf(component) > -1) {
-            this.watchers = this.watchers.filter(watcher => watcher != component);
+            this.watchers = this.watchers.filter(watcher => watcher !== component);
         }
     }
 
@@ -32,8 +32,8 @@ class Cart {
 
     removeFromCart(id) {
         const oldCart = this.getCart();
-        const cart = oldCart.filter((cartId) => id != cartId);
-        if (cart.length != oldCart.length) {
+        const cart = oldCart.filter((cartId) => id !== cartId);
+        if (cart.length !== oldCart.length) {
             this.updateWatchers(cart);
         }
     };
