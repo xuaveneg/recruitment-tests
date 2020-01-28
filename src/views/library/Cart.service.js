@@ -1,13 +1,17 @@
 function addToCart(id) {
     const cart = getCart();
-    cart.push(id);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    if (cart.indexOf(id) === -1) {
+        cart.push(id);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 }
 
 function removeFromCart(id) {
-    let cart = getCart();
-    cart = cart.filter((cartId) => id != cartId);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const oldCart = getCart();
+    const cart = oldCart.filter((cartId) => id != cartId);
+    if (cart.length != oldCart.length) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 }
 
 function getCart() {

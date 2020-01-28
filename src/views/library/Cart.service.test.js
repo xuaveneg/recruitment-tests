@@ -146,3 +146,15 @@ test('should not remove id not in cart', () => {
     // THEN
     expect(JSON.parse(localStorage.getItem('cart'))).toEqual(['test1', 'test2']);
 });
+
+test('should not add twice same id', () => {
+    // GIVEN
+    localStorage.removeItem('cart');
+
+    // WHEN
+    addToCart('test1');
+    addToCart('test1');
+
+    // THEN
+    expect(JSON.parse(localStorage.getItem('cart'))).toEqual(['test1']);
+});
