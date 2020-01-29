@@ -64,7 +64,7 @@ test('should watch Cart service', () => {
     cartService.watchers = [];
 
     // WHEN
-    const nav = shallow(<Nav />);
+    shallow(<Nav />);
 
     // THEN
     expect(cartService.watchers).toHaveLength(1);

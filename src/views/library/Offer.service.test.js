@@ -128,7 +128,7 @@ test('should call backend on data retrieval', done => {
     // THEN
     return discount
         .then(discount => {
-            expect(discount).toEqual({discountPrice: 60, offer: {type: 'slice', value: 20, sliceValue: 50}})
+            expect(discount).toEqual({discountPrice: 60, offer: {type: 'slice', value: 20, sliceValue: 50}});
             done();
         });
 });

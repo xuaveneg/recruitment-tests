@@ -13,7 +13,7 @@ class Offer {
 
     handleCommercialOffersResponse(price, offers) {
         return offers.reduce((discounted, offer) => {
-            let discountPrice = discounted.discountPrice;
+            let discountPrice;
             switch (offer.type) {
                 case 'percentage':
                     discountPrice = this.computePercentage(price, offer.value);
@@ -23,7 +23,7 @@ class Offer {
                     break;
                 case 'slice':
                     discountPrice = this.computeSlice(price, offer.value, offer.sliceValue);
-                    break
+                    break;
                 default:
                     discountPrice = price;
                     break;
