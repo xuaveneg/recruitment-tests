@@ -10,6 +10,8 @@ $footer-size: 20px;
 $menu-size: 30px;
 $inner-margin-size: 20px;
 $responsive-size: 500px;
+$border-size: 1px;
+$scrollbar-size: 3px;
 
 $tile-width: 30vw;
 $tile-img-width: 10vw;
@@ -76,7 +78,7 @@ nav {
     font-size: calc(#{$menu-size} / 2);
     height: $menu-size;
     width: $full-width;
-    border-bottom: 1px $color-primary solid;
+    border-bottom: $border-size $color-primary solid;
     z-index: $z-top;
     & > div {
         width: $full-width;
@@ -120,15 +122,18 @@ article {
         justify-content: space-around;
         flex-wrap: wrap;
         padding-bottom: calc(#{$inner-margin-size} + #{$footer-size});
+        padding-top: $inner-margin-size;
+        margin-left: $inner-margin-size;
+        margin-right: $inner-margin-size;
+        margin-bottom: $inner-margin-size;
         & > div:last-of-type {
             text-align: right;
-            margin: $inner-margin-size;
         }
     }
     div.books {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
         flex-wrap: wrap;
     }
     div.book {
@@ -136,12 +141,12 @@ article {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        margin-top: $inner-margin-size;
+        margin: calc(#{$inner-margin-size} / 2) calc((#{$full-absolute-width} / 6) - (#{$tile-width} / 2) - (#{$inner-margin-size} / 3) - #{$border-size} - #{$scrollbar-size});
         width: $tile-width;
         max-height: $full-height;
         text-align: center;
         background-color: $color-p-lighter;
-        border: 1px solid $color-p-darker;
+        border: $border-size solid $color-p-darker;
         border-radius: $tile-border-radius;
         h2 {
             font-size: $font-title-size;
@@ -170,7 +175,7 @@ article {
                 padding: 0 calc(#{$inner-margin-size} / 2);
                 margin-bottom: $font-title-size;
                 background-color: $color-p-darker;
-                border: 1px $color-primary;
+                border: $border-size $color-primary;
                 border-radius: calc(#{$tile-border-radius} / 3);
                 cursor: pointer;
             }
@@ -206,7 +211,7 @@ article {
         align-items: flex-start;
         justify-content: flex-start;
         text-align: start;
-        border: 1px $color-primary;
+        border: $border-size $color-primary;
         border-radius: calc(#{$tile-border-radius} / 3);
         p {
             margin: $inner-margin-size;
