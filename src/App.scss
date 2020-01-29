@@ -116,6 +116,10 @@ a {
 }
 
 article {
+    & > h2 {
+        margin-top: 0;
+        text-align: center;
+    }
     & > div {
         display: flex;
         flex-direction: column;
@@ -221,7 +225,6 @@ article {
 
 .home {
     display: flex;
-    min-height: calc(#{$full-height} - #{$header-size} - #{$menu-size} - #{$footer-size});
     align-items: center;
     justify-content: space-around;
 }

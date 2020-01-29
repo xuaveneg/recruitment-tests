@@ -70,3 +70,16 @@ test('should have single Cart component', () => {
     // THEN
     expect(router.find(Cart)).toHaveLength(1);
 });
+
+test('should have 3 h2', () => {
+    // GIVEN
+
+    // WHEN
+    const router = shallow(<Router />);
+
+    // THEN
+    expect(router.find('h2')).toHaveLength(3);
+    expect(router.find('h2').at(0).text()).toEqual('Accueil');
+    expect(router.find('h2').at(1).text()).toEqual('Inventaire');
+    expect(router.find('h2').at(2).text()).toEqual('Panier');
+});
